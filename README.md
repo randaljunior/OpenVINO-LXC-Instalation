@@ -114,18 +114,14 @@ uid=0(root) gid=0(root) groups=0(root),104(render)
 ```
 
 ## Instalação do Python
-- Instalar o python3 e suas dependências:
+- Instalar o python3 e suas dependências para o modelo de embendding:
 ```
 apt install -y python3-full python3-venv python3-pip python3-dev 
 python3 -m venv /opt/openvino-llm/venv
 source /opt/openvino-llm/venv/bin/activate
 pip install --upgrade pip setuptools wheel
 pip install openvino optimum[openvino,nncf] transformers huggingface_hub openvino-genai
-pip install "git+https://github.com/rkazants/optimum-intel.git@support_gemma_4" --extra-index-url https://download.pytorch.org/whl/cpu
-pip install transformers==5.5.0
-pip install torchvision Pillow --extra-index-url https://download.pytorch.org/whl/cpu
 ```
-
 - Identificar se a GPU está acessível:
 ```
 python3 - <<'PY'
@@ -141,19 +137,16 @@ for device in core.available_devices:
         print(device, "-", e)
 PY
 ```
-
-## Instalando os modelos google/gemma-4-E2B-it e nomic-ai/nomic-embed-text-v1.5
+- Converter o modelo de embending
 ```
-optimum-cli export openvino \
-  --model google/gemma-4-E2B-it \
-  /models/openvino/gemma-4-E2B-it
+optimum-cli export openvino   --model intfloat/multilingual-e5-base   --task feature-extraction   /models/openvino/multilingual-e5-base-ov
 ```
+- Alterando o Python para suportar o Gemma4
 ```
-optimum-cli export openvino \
-  --model nomic-ai/nomic-embed-text-v1.5 \
-  --task feature-extraction \
-  --trust-remote-code \
-  /models/openvino/nomic-embed-text-v1.5
+pip install --pre openvino openvino-genai openvino-tokenizers --upgrade --extra-index-url https://storage.openvinotoolkit.org/simple/wheels/nightly
+pip install "git+https://github.com/rkazants/optimum-intel.git@support_gemma_4" --extra-index-url https://download.pytorch.org/whl/cpu
+pip install transformers==5.5.0
+pip install torchvision Pillow --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
 ## Executando o Servidor

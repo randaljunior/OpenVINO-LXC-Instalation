@@ -47,3 +47,35 @@ libze1 \
 vainfo \
 clinfo
 ```
+
+# Corrigir erro de grupo de Hardware
+- Executar os seguintes comandos e fazer um reboot:
+```
+groupmod -n render-old render && \
+groupmod -n render postdrop && \
+usermod -aG render root && \
+dpkg-statoverride --remove /usr/sbin/postqueue && \
+dpkg-statoverride --remove /usr/sbin/postdrop && \
+apt install -f
+```
+- Testar com os seguintes comandos:
+```
+ls -l /dev/dri
+grep '^render:' /etc/group
+id
+lspci -nn | grep -Ei 'vga|3d|display'
+vainfo --display drm --device /dev/dri/renderD128
+clinfo | head -120
+```
+Deve aparecer algo como o texto abaixo e identificar corretamente a GPU
+```
+crw-rw---- 1 nobody video  226,   0 May  3 20:58 card0
+crw-rw---- 1 nobody render 226, 128 Apr 27 20:48 renderD128
+
+render:x:104:root
+
+uid=0(root) gid=0(root) groups=0(root),104(render)
+```
+
+
+

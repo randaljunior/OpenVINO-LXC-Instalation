@@ -17,6 +17,7 @@ lxc.idmap: g 105 100105 65431
 <details>
     <summary>Ubuntu</summary>
 <p>
+    
 - Repositórios da Intel
 - Instalar as primeiras dependências
 ```
@@ -50,6 +51,7 @@ libze1 \
 vainfo \
 clinfo
 ```
+
 </p>
 </details>
 

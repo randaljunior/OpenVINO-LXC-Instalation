@@ -28,6 +28,7 @@ echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt
 ```
 - Instalar drivers Intel
 ```
+apt update && \
 apt install -y \
 intel-opencl-icd \
 intel-media-va-driver-non-free \

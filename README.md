@@ -120,7 +120,7 @@ apt install -y python3-full python3-venv python3-pip python3-dev
 python3 -m venv /opt/openvino-llm/venv
 source /opt/openvino-llm/venv/bin/activate
 pip install --upgrade pip setuptools wheel
-pip install openvino optimum[openvino,nncf] transformers huggingface_hub openvino-genai
+pip install uvicorn fastapi openvino optimum[openvino,nncf] transformers huggingface_hub openvino-genai
 ```
 - Identificar se a GPU está acessível:
 ```
@@ -230,7 +230,6 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target
 ```
-
 - Ativar os serviços
 ```
 systemctl daemon-reload

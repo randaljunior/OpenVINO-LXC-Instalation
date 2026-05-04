@@ -56,7 +56,7 @@ clinfo
 </details>
 
 <details>
-    <summary>Ubuntu</summary>
+    <summary>Debian</summary>
 <p>
 
 - Instalar as primeiras dependências

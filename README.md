@@ -77,5 +77,43 @@ render:x:104:root
 uid=0(root) gid=0(root) groups=0(root),104(render)
 ```
 
+# Instalação do Python
+- Instalar o python3 e suas dependências:
+```
+apt install -y python3-full python3-venv python3-pip python3-dev build-essential git curl wget ca-certificates
+python3 -m venv /opt/openvino-llm/venv
+source /opt/openvino-llm/venv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install \
+  openvino \
+  openvino-genai \
+  optimum-intel \
+  "optimum[openvino]" \
+  transformers \
+  accelerate \
+  sentence-transformers \
+  fastapi \
+  uvicorn \
+  huggingface_hub \
+  torch \ 
+  "numpy<2.0"
+```
+
+- Identificar se a GPU está acessível:
+```
+python3 - <<'PY'
+import openvino as ov
+
+core = ov.Core()
+print("Dispositivos:", core.available_devices)
+
+for device in core.available_devices:
+    try:
+        print(device, "-", core.get_property(device, "FULL_DEVICE_NAME"))
+    except Exception as e:
+        print(device, "-", e)
+PY
+```
+
 
 

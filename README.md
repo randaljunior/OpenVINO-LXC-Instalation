@@ -132,3 +132,95 @@ optimum-cli export openvino \
   /models/openvino/nomic-embed-text-v1.5
 ```
 
+## Executando o Servidor
+### Servidor de modelos
+```
+cd /opt/openvino-llm
+uvicorn server_llm:app --host 0.0.0.0 --port 8000
+```
+- Scripts de teste
+```
+curl http://127.0.0.1:8000/v1/models
+```
+```
+curl http://127.0.0.1:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemma-4-E2B-it-openvino",
+    "messages": [
+      {"role": "user", "content": "Explique em uma frase o que é OpenVINO."}
+    ],
+    "max_tokens": 80
+  }'
+```
+
+### Servidor de Embenddings
+```
+cd /opt/openvino-llm
+uvicorn server_embed:app --host 0.0.0.0 --port 8001
+```
+- Scripts de teste
+```
+curl http://127.0.0.1:8001/v1/models
+```
+```
+curl http://127.0.0.1:8001/v1/embeddings \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "nomic-embed-text-v1.5-openvino",
+    "input": "Este é um teste de embedding local com OpenVINO."
+  }'
+```
+
+### Criando um Serviço
+- Verificando o caminho do aplicativo uvicorn
+```
+which uvicorn
+```
+
+- Criar o serviço de Chat: /etc/systemd/system/openvino-llm.service
+```
+[Unit]
+Description=OpenVINO Gemma LLM OpenAI-compatible API
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/openvino-llm
+Environment="XDG_RUNTIME_DIR=/tmp"
+ExecStart=/usr/local/bin/uvicorn server_llm:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- Criar o serviço de Embendding: /etc/systemd/system/openvino-embed.service
+```
+[Unit]
+Description=OpenVINO Nomic Embedding OpenAI-compatible API
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/openvino-llm
+Environment="XDG_RUNTIME_DIR=/tmp"
+ExecStart=/usr/local/bin/uvicorn server_embed:app --host 0.0.0.0 --port 8001
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- Ativar os serviços
+```
+systemctl daemon-reload
+systemctl enable --now openvino-llm
+systemctl enable --now openvino-embed
+```
+
+
+
+

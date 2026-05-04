@@ -75,7 +75,8 @@ apt update && \
 apt install -y ocl-icd-libopencl1 \
 intel-gpu-tools \
 vainfo \
-clinfo
+clinfo \
+pciutils
 ```
 - Procurar o runtime mais recente em https://github.com/intel/compute-runtime/releases e instalar.
 </p>
@@ -91,6 +92,7 @@ usermod -aG render root && \
 dpkg-statoverride --remove /usr/sbin/postqueue && \
 dpkg-statoverride --remove /usr/sbin/postdrop && \
 apt install -f
+su - root
 ```
 - Testar com os seguintes comandos:
 ```

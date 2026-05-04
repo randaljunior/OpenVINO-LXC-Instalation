@@ -122,8 +122,13 @@ PY
 ```
 optimum-cli export openvino \
   --model google/gemma-4-E2B-it \
-  --weight-format int4 \
   /models/openvino/gemma-4-E2B-it
 ```
-
+```
+optimum-cli export openvino \
+  --model nomic-ai/nomic-embed-text-v1.5 \
+  --task feature-extraction \
+  --trust-remote-code \
+  /models/openvino/nomic-embed-text-v1.5
+```
 

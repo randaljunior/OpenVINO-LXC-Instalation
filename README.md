@@ -71,7 +71,11 @@ echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt
 ```
 - Instalar drivers Intel
 ```
-apt install ocl-icd-libopencl
+apt update && \
+apt install -y ocl-icd-libopencl \
+intel-gpu-tools \
+vainfo \
+clinfo
 ```
 - Procurar o runtime mais recente em https://github.com/intel/compute-runtime/releases e instalar.
 </p>

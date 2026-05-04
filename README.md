@@ -18,13 +18,13 @@ lxc.idmap: g 105 100105 65431
     <summary>Ubuntu</summary>
 <p>
     
-- Repositórios da Intel
 - Instalar as primeiras dependências
 ```
 add-apt-repository universe -y
 apt update && apt dist-upgrade -y
 apt install -y software-properties-common gpg
 ```
+- Repositórios da Intel
 ```
 wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null && \
 echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | tee /etc/apt/sources.list.d/oneAPI.list
@@ -55,7 +55,27 @@ clinfo
 </p>
 </details>
 
+<details>
+    <summary>Ubuntu</summary>
+<p>
 
+- Instalar as primeiras dependências
+```
+apt update && apt dist-upgrade -y
+apt install -y gpg
+```
+- Repositórios da Intel
+```
+wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null && \
+echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | tee /etc/apt/sources.list.d/oneAPI.list
+```
+- Instalar drivers Intel
+```
+apt install ocl-icd-libopencl
+```
+- Procurar o runtime mais recente em https://github.com/intel/compute-runtime/releases e instalar.
+</p>
+</details>
 
 
 ## Corrigir erro de grupo de Hardware

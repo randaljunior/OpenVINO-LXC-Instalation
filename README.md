@@ -72,7 +72,7 @@ echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt
 - Instalar drivers Intel
 ```
 apt update && \
-apt install -y ocl-icd-libopencl \
+apt install -y ocl-icd-libopencl1 \
 intel-gpu-tools \
 vainfo \
 clinfo

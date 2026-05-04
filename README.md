@@ -120,22 +120,10 @@ apt install -y python3-full python3-venv python3-pip python3-dev
 python3 -m venv /opt/openvino-llm/venv
 source /opt/openvino-llm/venv/bin/activate
 pip install --upgrade pip setuptools wheel
-pip install \
-  openvino \
-  openvino-genai \
-  optimum-intel \
-  "optimum[openvino]" \
-  transformers \
-  accelerate \
-  sentence-transformers \
-  fastapi \
-  uvicorn \
-  huggingface_hub \
-  torch \
-  compressed-tensors \
-  pillow \
-  requests \
-  "numpy<2.0"
+pip install openvino optimum[openvino,nncf] transformers huggingface_hub openvino-genai
+pip install "git+https://github.com/rkazants/optimum-intel.git@support_gemma_4" --extra-index-url https://download.pytorch.org/whl/cpu
+pip install transformers==5.5.0
+pip install torchvision Pillow --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
 - Identificar se a GPU está acessível:

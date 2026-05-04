@@ -14,7 +14,7 @@ lxc.idmap: g 104 104 1
 lxc.idmap: g 105 100105 65431
 ```
 
-# Repositórios e drivers
+## Repositórios e drivers
 - Repositórios da Intel
 ```
 wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null && \
@@ -48,7 +48,7 @@ vainfo \
 clinfo
 ```
 
-# Corrigir erro de grupo de Hardware
+## Corrigir erro de grupo de Hardware
 - Executar os seguintes comandos e fazer um reboot:
 ```
 groupmod -n render-old render && \
@@ -77,7 +77,7 @@ render:x:104:root
 uid=0(root) gid=0(root) groups=0(root),104(render)
 ```
 
-# Instalação do Python
+## Instalação do Python
 - Instalar o python3 e suas dependências:
 ```
 apt install -y python3-full python3-venv python3-pip python3-dev build-essential git curl wget ca-certificates
@@ -95,7 +95,10 @@ pip install \
   fastapi \
   uvicorn \
   huggingface_hub \
-  torch \ 
+  torch \
+  compressed-tensors \
+  pillow \
+  requests \
   "numpy<2.0"
 ```
 
@@ -115,5 +118,12 @@ for device in core.available_devices:
 PY
 ```
 
+## Instalando os modelos google/gemma-4-E2B-it e nomic-ai/nomic-embed-text-v1.5
+```
+optimum-cli export openvino \
+  --model google/gemma-4-E2B-it \
+  --weight-format int4 \
+  /models/openvino/gemma-4-E2B-it
+```
 
 

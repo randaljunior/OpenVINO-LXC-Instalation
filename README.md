@@ -13,11 +13,10 @@ lxc.idmap: g 45 100045 59
 lxc.idmap: g 104 104 1
 lxc.idmap: g 105 100105 65431
 ```
-
-<details>
-    <summary>## Repositórios e drivers</summary>
-
 ## Repositórios e drivers
+<details>
+    <summary>Ubuntu</summary>
+<p>
 - Repositórios da Intel
 - Instalar as primeiras dependências
 ```
@@ -51,7 +50,8 @@ libze1 \
 vainfo \
 clinfo
 ```
-    </details>
+</p>
+</details>
 
 
 

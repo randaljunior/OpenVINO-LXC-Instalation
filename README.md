@@ -22,7 +22,7 @@ lxc.idmap: g 105 100105 65431
 ```
 add-apt-repository universe -y
 apt update && apt dist-upgrade -y
-apt install -y software-properties-common gpg
+apt install -y software-properties-common gpg build-essential git curl wget ca-certificates
 ```
 - Repositórios da Intel
 ```
@@ -62,7 +62,7 @@ clinfo
 - Instalar as primeiras dependências
 ```
 apt update && apt dist-upgrade -y
-apt install -y gpg
+apt install -y gpg build-essential git curl wget ca-certificates
 ```
 - Repositórios da Intel
 ```
@@ -116,7 +116,7 @@ uid=0(root) gid=0(root) groups=0(root),104(render)
 ## Instalação do Python
 - Instalar o python3 e suas dependências:
 ```
-apt install -y python3-full python3-venv python3-pip python3-dev build-essential git curl wget ca-certificates
+apt install -y python3-full python3-venv python3-pip python3-dev 
 python3 -m venv /opt/openvino-llm/venv
 source /opt/openvino-llm/venv/bin/activate
 pip install --upgrade pip setuptools wheel

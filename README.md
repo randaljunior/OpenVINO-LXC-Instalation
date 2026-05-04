@@ -14,6 +14,9 @@ lxc.idmap: g 104 104 1
 lxc.idmap: g 105 100105 65431
 ```
 
+<details>
+    <summary>## Repositórios e drivers</summary>
+
 ## Repositórios e drivers
 - Repositórios da Intel
 - Instalar as primeiras dependências
@@ -48,6 +51,10 @@ libze1 \
 vainfo \
 clinfo
 ```
+    </details>
+
+
+
 
 ## Corrigir erro de grupo de Hardware
 - Executar os seguintes comandos e fazer um reboot:

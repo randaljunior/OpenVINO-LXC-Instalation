@@ -84,7 +84,7 @@ pciutils
 
 
 ## Corrigir erro de grupo de Hardware
-- Executar os seguintes comandos e fazer um reboot:
+- Executar os seguintes comandos:
 ```
 groupmod -n render-old render && \
 groupmod -n render postdrop && \
@@ -92,8 +92,20 @@ usermod -aG render root && \
 dpkg-statoverride --remove /usr/sbin/postqueue && \
 dpkg-statoverride --remove /usr/sbin/postdrop && \
 apt install -f
-su - root
 ```
+Editar o .bashrc
+```
+nano ~/.bashrc
+```
+E incluir as linhas ao final:
+```
+if [ -z "$ALREADY_LOGGED" ] && ! id -G | grep -qw 104; then
+    export ALREADY_LOGGED=1
+    exec su - root
+fi
+```
+** REINICIAR **
+
 - Testar com os seguintes comandos:
 ```
 ls -l /dev/dri
